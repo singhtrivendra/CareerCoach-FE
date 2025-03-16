@@ -19,21 +19,21 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4 mt-6">
               <a 
-                href="#" 
+                href="https://x.com/SinghTrivendra7" 
                 className="text-foreground/70 hover:text-primary transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
+                href="https://www.linkedin.com/in/trivendra-singh-919bb6255/" 
                 className="text-foreground/70 hover:text-primary transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
+                href="https://github.com/singhtrivendra" 
                 className="text-foreground/70 hover:text-primary transition-colors"
                 aria-label="GitHub"
               >
