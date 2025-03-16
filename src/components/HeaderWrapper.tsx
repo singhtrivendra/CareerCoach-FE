@@ -42,12 +42,12 @@ export default function HeaderWrapper() {
       <div className="fixed top-3 md:top-4 right-4 md:right-8 z-50">
         {isLoggedIn ? (
           <div className="flex items-center gap-2">
-            <Link to="/profile">
+            {/* <Link to="/profile">
               <Button variant="ghost" className="flex items-center gap-2 bg-green-600/10 hover:bg-green-600/20">
                 <User size={16} className="text-green-600" />
                 <span className="text-green-600">Profile</span>
               </Button>
-            </Link>
+            </Link> */}
             <Button variant="ghost" onClick={handleLogout} className="bg-red-500/10 hover:bg-red-500/20">
               <LogOut size={16} className="text-red-500" />
               <span className="text-red-500 ml-1">Logout</span>
