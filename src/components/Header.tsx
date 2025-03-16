@@ -22,6 +22,7 @@ export default function Header() {
     { name: "Home", path: "/" },
     { name: "Interview Simulator", path: "/interview" },
     { name: "Skills Analysis", path: "/skills" },
+    { name: "Market Trends", path: "/market-trends" },
     { name: "Course Recommendations", path: "/courses" },
     { name: "About", path: "/about" },
   ];
