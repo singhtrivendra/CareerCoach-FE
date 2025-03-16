@@ -1,11 +1,9 @@
-
 import { useState } from "react";
 import { Star, ExternalLink, Bookmark, BookmarkCheck, Search, Filter, ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 
 type CourseType = {
@@ -20,9 +18,11 @@ type CourseType = {
   price: number | "Free";
   matchScore: number;
   image: string;
+  url: string;
   saved: boolean;
 };
 
+// Updated mock courses with proper images and URLs
 const mockCourses: CourseType[] = [
   {
     id: 1,
@@ -35,7 +35,8 @@ const mockCourses: CourseType[] = [
     duration: "42 hours",
     price: 89.99,
     matchScore: 95,
-    image: "https://source.unsplash.com/random/400x300/?python",
+    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    url: "https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/",
     saved: false,
   },
   {
@@ -49,7 +50,8 @@ const mockCourses: CourseType[] = [
     duration: "48 hours",
     price: 99.99,
     matchScore: 92,
-    image: "https://source.unsplash.com/random/400x300/?javascript",
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    url: "https://www.udemy.com/course/react-the-complete-guide-incl-redux/",
     saved: true,
   },
   {
@@ -63,7 +65,8 @@ const mockCourses: CourseType[] = [
     duration: "6 months",
     price: "Free",
     matchScore: 88,
-    image: "https://source.unsplash.com/random/400x300/?data",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    url: "https://www.coursera.org/professional-certificates/google-data-analytics",
     saved: false,
   },
   {
@@ -77,7 +80,8 @@ const mockCourses: CourseType[] = [
     duration: "10 weeks",
     price: "Free",
     matchScore: 85,
-    image: "https://source.unsplash.com/random/400x300/?ai",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    url: "https://www.edx.org/course/introduction-to-deep-learning",
     saved: false,
   },
   {
@@ -91,7 +95,8 @@ const mockCourses: CourseType[] = [
     duration: "3 months",
     price: "Free",
     matchScore: 80,
-    image: "https://source.unsplash.com/random/400x300/?design",
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    url: "https://www.coursera.org/specializations/ui-ux-design",
     saved: true,
   },
   {
@@ -105,7 +110,8 @@ const mockCourses: CourseType[] = [
     duration: "36 hours",
     price: 79.99,
     matchScore: 78,
-    image: "https://source.unsplash.com/random/400x300/?code",
+    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    url: "https://www.udemy.com/course/nodejs-the-complete-guide/",
     saved: false,
   }
 ];
@@ -150,6 +156,16 @@ export default function CourseRecommendation() {
     }
   };
 
+  const viewCourse = (url: string) => {
+    // Open the course URL in a new tab
+    window.open(url, "_blank", "noopener,noreferrer");
+    
+    toast({
+      title: "Opening course page",
+      description: "Redirecting to the course provider's website",
+    });
+  };
+
   const getProviderLogo = (provider: string) => {
     switch (provider) {
       case "udemy":
@@ -176,6 +192,89 @@ export default function CourseRecommendation() {
     }
   };
 
+  // Function to render course cards - used for both recommended and saved tabs
+  const renderCourseCard = (course: CourseType) => (
+    <Card key={course.id} className="relative overflow-hidden hover-scale group h-full animate-fade-in">
+      <div className="absolute top-3 right-3 z-10">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="rounded-full bg-background/80 backdrop-blur-sm hover:bg-background"
+          onClick={() => toggleSaved(course.id)}
+        >
+          {course.saved ? (
+            <BookmarkCheck className="h-5 w-5 text-primary" />
+          ) : (
+            <Bookmark className="h-5 w-5" />
+          )}
+        </Button>
+      </div>
+      
+      <div className="relative h-40 overflow-hidden">
+        <img 
+          src={course.image} 
+          alt={course.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
+          }}
+        />
+        <div className="absolute top-3 left-3">
+          <Badge className="bg-primary/90 backdrop-blur-sm">
+            {course.matchScore}% Match
+          </Badge>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/60 to-transparent" />
+      </div>
+      
+      <CardContent className="pt-5">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm font-medium text-muted-foreground">
+            {getProviderLogo(course.provider)}
+          </span>
+          <div className="flex items-center">
+            <Star className="h-4 w-4 text-amber-500 fill-amber-500 mr-1" />
+            <span className="text-sm font-medium">{course.rating}</span>
+            <span className="text-xs text-muted-foreground ml-1">({course.reviewCount})</span>
+          </div>
+        </div>
+        
+        <h3 className="font-semibold mb-2 line-clamp-2 h-12">{course.title}</h3>
+        
+        <div className="flex flex-wrap gap-1 mb-3">
+          {course.category.slice(0, 3).map((cat, idx) => (
+            <Badge key={idx} variant="secondary" className="text-xs">
+              {cat}
+            </Badge>
+          ))}
+        </div>
+        
+        <div className="flex items-center justify-between text-sm">
+          <div className="flex items-center gap-2">
+            {getLevelBadge(course.level)}
+            <span className="text-muted-foreground">{course.duration}</span>
+          </div>
+          
+          <span className="font-medium">
+            {course.price === "Free" ? "Free" : `$${course.price}`}
+          </span>
+        </div>
+      </CardContent>
+      
+      <CardFooter className="pt-0">
+        <Button 
+          variant="default" 
+          className="w-full mt-3 group"
+          onClick={() => viewCourse(course.url)}
+        >
+          View Course 
+          <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+
   return (
     <div className="w-full">
       <div className="space-y-6">
@@ -183,7 +282,7 @@ export default function CourseRecommendation() {
           <CardHeader>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
-                <CardTitle>Course Recommendations</CardTitle>
+                <CardTitle className="text-gradient-green">Course Recommendations</CardTitle>
                 <CardDescription>
                   Personalized courses based on your skill gaps and career path
                 </CardDescription>
@@ -207,7 +306,7 @@ export default function CourseRecommendation() {
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="flex items-center gap-1"
+                    className="flex items-center gap-1 animate-pulse"
                     onClick={() => {
                       setSortBy(sortBy === "match" ? "rating" : sortBy === "rating" ? "price" : "match");
                     }}
@@ -238,78 +337,7 @@ export default function CourseRecommendation() {
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {sortedCourses.map((course) => (
-                      <Card key={course.id} className="relative overflow-hidden hover-scale group h-full">
-                        <div className="absolute top-3 right-3 z-10">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="rounded-full bg-background/80 backdrop-blur-sm hover:bg-background"
-                            onClick={() => toggleSaved(course.id)}
-                          >
-                            {course.saved ? (
-                              <BookmarkCheck className="h-5 w-5 text-primary" />
-                            ) : (
-                              <Bookmark className="h-5 w-5" />
-                            )}
-                          </Button>
-                        </div>
-                        
-                        <div className="relative h-40 overflow-hidden">
-                          <img 
-                            src={course.image} 
-                            alt={course.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          <div className="absolute top-3 left-3">
-                            <Badge className="bg-primary/90 backdrop-blur-sm">
-                              {course.matchScore}% Match
-                            </Badge>
-                          </div>
-                          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/60 to-transparent" />
-                        </div>
-                        
-                        <CardContent className="pt-5">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm font-medium text-muted-foreground">
-                              {getProviderLogo(course.provider)}
-                            </span>
-                            <div className="flex items-center">
-                              <Star className="h-4 w-4 text-amber-500 fill-amber-500 mr-1" />
-                              <span className="text-sm font-medium">{course.rating}</span>
-                              <span className="text-xs text-muted-foreground ml-1">({course.reviewCount})</span>
-                            </div>
-                          </div>
-                          
-                          <h3 className="font-semibold mb-2 line-clamp-2 h-12">{course.title}</h3>
-                          
-                          <div className="flex flex-wrap gap-1 mb-3">
-                            {course.category.slice(0, 3).map((cat, idx) => (
-                              <Badge key={idx} variant="secondary" className="text-xs">
-                                {cat}
-                              </Badge>
-                            ))}
-                          </div>
-                          
-                          <div className="flex items-center justify-between text-sm">
-                            <div className="flex items-center gap-2">
-                              {getLevelBadge(course.level)}
-                              <span className="text-muted-foreground">{course.duration}</span>
-                            </div>
-                            
-                            <span className="font-medium">
-                              {course.price === "Free" ? "Free" : `$${course.price}`}
-                            </span>
-                          </div>
-                        </CardContent>
-                        
-                        <CardFooter className="pt-0">
-                          <Button variant="default" className="w-full mt-3">
-                            View Course <ExternalLink className="ml-2 h-4 w-4" />
-                          </Button>
-                        </CardFooter>
-                      </Card>
-                    ))}
+                    {sortedCourses.map(course => renderCourseCard(course))}
                   </div>
                 )}
               </TabsContent>
@@ -328,74 +356,7 @@ export default function CourseRecommendation() {
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {savedCourses.map((course) => (
-                      <Card key={course.id} className="relative overflow-hidden hover-scale group h-full">
-                        <div className="absolute top-3 right-3 z-10">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="rounded-full bg-background/80 backdrop-blur-sm hover:bg-background"
-                            onClick={() => toggleSaved(course.id)}
-                          >
-                            <BookmarkCheck className="h-5 w-5 text-primary" />
-                          </Button>
-                        </div>
-                        
-                        <div className="relative h-40 overflow-hidden">
-                          <img 
-                            src={course.image} 
-                            alt={course.title}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          <div className="absolute top-3 left-3">
-                            <Badge className="bg-primary/90 backdrop-blur-sm">
-                              {course.matchScore}% Match
-                            </Badge>
-                          </div>
-                          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/60 to-transparent" />
-                        </div>
-                        
-                        <CardContent className="pt-5">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm font-medium text-muted-foreground">
-                              {getProviderLogo(course.provider)}
-                            </span>
-                            <div className="flex items-center">
-                              <Star className="h-4 w-4 text-amber-500 fill-amber-500 mr-1" />
-                              <span className="text-sm font-medium">{course.rating}</span>
-                              <span className="text-xs text-muted-foreground ml-1">({course.reviewCount})</span>
-                            </div>
-                          </div>
-                          
-                          <h3 className="font-semibold mb-2 line-clamp-2 h-12">{course.title}</h3>
-                          
-                          <div className="flex flex-wrap gap-1 mb-3">
-                            {course.category.slice(0, 3).map((cat, idx) => (
-                              <Badge key={idx} variant="secondary" className="text-xs">
-                                {cat}
-                              </Badge>
-                            ))}
-                          </div>
-                          
-                          <div className="flex items-center justify-between text-sm">
-                            <div className="flex items-center gap-2">
-                              {getLevelBadge(course.level)}
-                              <span className="text-muted-foreground">{course.duration}</span>
-                            </div>
-                            
-                            <span className="font-medium">
-                              {course.price === "Free" ? "Free" : `$${course.price}`}
-                            </span>
-                          </div>
-                        </CardContent>
-                        
-                        <CardFooter className="pt-0">
-                          <Button variant="default" className="w-full mt-3">
-                            View Course <ExternalLink className="ml-2 h-4 w-4" />
-                          </Button>
-                        </CardFooter>
-                      </Card>
-                    ))}
+                    {savedCourses.map(course => renderCourseCard(course))}
                   </div>
                 )}
               </TabsContent>
