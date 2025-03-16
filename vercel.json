@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/api/:path*", 
-        "destination": "https://think-tank-1.onrender.com/:path*"
+        "destination": "https://careercoach-be.onrender.com/:path*"
       }
     ]
   }
