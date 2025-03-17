@@ -41,7 +41,7 @@ This project is built with modern web technologies:
 git clone <YOUR_REPOSITORY_URL>
 
 # Navigate to the project directory
-cd careerhub-ai
+cd CareerCoach-FE
 
 # Install dependencies
 npm install
