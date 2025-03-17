@@ -1,20 +1,28 @@
 ##PROJECT LINK :- https://career-coach-fe.vercel.app/#/
 
-# 🚀 CareerHubAI - AI-Powered Career Growth Platform
+# 🚀 CareerCoach - AI-Powered Career Growth Platform
 
 ## 📋 Overview
+CareerCoach is an innovative platform that helps professionals navigate their career paths with precision using AI-powered guidance. Whether you're looking to advance in tech, healthcare, business, or other fields, our platform provides personalized insights, interview preparation, and skill development recommendations.
 
-CareerHubAI is an innovative platform that helps professionals navigate their career paths with precision using AI-powered guidance. Whether you're looking to advance in tech, healthcare, business, or other fields, our platform provides personalized insights, interview preparation, and skill development recommendations.
+---
 
 ## ✨ Key Features
+- **🤖 AI Interview Simulation** – Practice with our intelligent interview bot  
+- **🌍 Career Path Exploration** – Discover opportunities across various disciplines  
+- **📚 Personalized Learning Paths** – Tailored educational content for skill development  
+- **👥 Professional Network** – Connect with mentors and peers in your industry  
+- **📈 Market Trends** – Stay updated with real-time industry trends and salary benchmarks  
+- **✅ Skill Assessment Tests** – Evaluate and certify your proficiency in various domains  
+- **🛠 Career Counseling** – Get AI-driven career advice and mentorship recommendations
 
-- **🤖 AI Interview Simulation** - Practice with our intelligent interview bot
-- **🌍 Career Path Exploration** - Discover opportunities across various disciplines
-- **📚 Personalized Learning Paths** - Tailored educational content for skill development
-- **👥 Professional Network** - Connect with mentors and peers in your industry
-- **📈 Market Trends** - Stay updated with real-time industry trends and salary benchmarks
-- **✅ Skill Assessment Tests** - Evaluate and certify your proficiency in various domains
-- **🛠 Career Counseling** - Get AI-driven career advice and mentorship recommendations
+  
+## 🏆 Benefits
+✅ Gain confidence through realistic AI-driven interview practice  
+✅ Get insights into industry trends and high-demand skills  
+✅ Build a strong professional network with industry experts  
+✅ Improve your skills with personalized learning paths  
+✅ Make informed career decisions with AI-generated suggestions  
 
 ## 🖥️ Tech Stack
 
