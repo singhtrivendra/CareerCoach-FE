@@ -16,23 +16,25 @@ CareerCoach is an innovative platform that helps professionals navigate their ca
 - **✅ Skill Assessment Tests** – Evaluate and certify your proficiency in various domains  
 - **🛠 Career Counseling** – Get AI-driven career advice and mentorship recommendations
 
-  
-## 🏆 Benefits
-✅ Gain confidence through realistic AI-driven interview practice  
-✅ Get insights into industry trends and high-demand skills  
-✅ Build a strong professional network with industry experts  
-✅ Improve your skills with personalized learning paths  
-✅ Make informed career decisions with AI-generated suggestions  
 
-## 🖥️ Tech Stack
 
+## 🌐 Tech Stack
 This project is built with modern web technologies:
 
-- [React](https://reactjs.org/) - UI library
-- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [Framer Motion](https://www.framer.com/motion/) - Animation library
-- [shadcn/ui](https://ui.shadcn.com/) - Component library
+### **Frontend**
+- [React](https://reactjs.org/) – UI library  
+- [TypeScript](https://www.typescriptlang.org/) – Type-safe JavaScript  
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework  
+- [Framer Motion](https://www.framer.com/motion/) – Animation library  
+- [shadcn/ui](https://ui.shadcn.com/) – Component library  
+
+### **Backend**
+- [Node.js](https://nodejs.org/) – JavaScript runtime  
+- [Express](https://expressjs.com/) – Web framework for Node.js  
+- [Axios](https://axios-http.com/) – HTTP client for making API requests  
+- [MongoDB](https://www.mongodb.com/) – NoSQL database for storing data
+
+- **Gemini API Key** – AI integration for intelligent responses  
 
 ## 🔧 Development Setup
 
@@ -86,7 +88,13 @@ npm run dev
 #-----------------------------------------------------------------------------------------------------------
 
 
-
+  
+## 🏆 Benefits
+✅ Gain confidence through realistic AI-driven interview practice  
+✅ Get insights into industry trends and high-demand skills  
+✅ Build a strong professional network with industry experts  
+✅ Improve your skills with personalized learning paths  
+✅ Make informed career decisions with AI-generated suggestions  
 
 ## 🚀 Deployment
 
