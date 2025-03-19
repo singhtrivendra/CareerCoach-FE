@@ -1,25 +1,111 @@
+##PROJECT LINK :- https://career-coach-fe.vercel.app/#/
+
+# 🚀 CareerCoach - AI-Powered Career Growth Platform
+
+## 📋 Overview
+CareerCoach is an innovative platform that helps professionals navigate their career paths with precision using AI-powered guidance. Whether you're looking to advance in tech, healthcare, business, or other fields, our platform provides personalized insights, interview preparation, and skill development recommendations.
+
+---
+
+## ✨ Key Features
+- **🤖 AI Interview Simulation** – Practice with our intelligent interview bot  
+- **🌍 Career Path Exploration** – Discover opportunities across various disciplines  
+- **📚 Personalized Learning Paths** – Tailored educational content for skill development  
+- **👥 Professional Network** – Connect with mentors and peers in your industry  
+- **📈 Market Trends** – Stay updated with real-time industry trends and salary benchmarks  
+- **✅ Skill Assessment Tests** – Evaluate and certify your proficiency in various domains  
+- **🛠 Career Counseling** – Get AI-driven career advice and mentorship recommendations
+
+
+
+## 🌐 Tech Stack
+This project is built with modern web technologies:
+
+### **Frontend**
+- [React](https://reactjs.org/) – UI library  
+- [TypeScript](https://www.typescriptlang.org/) – Type-safe JavaScript  
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework  
+- [Framer Motion](https://www.framer.com/motion/) – Animation library  
+- [shadcn/ui](https://ui.shadcn.com/) – Component library  
+
+### **Backend**
+- [Node.js](https://nodejs.org/) – JavaScript runtime  
+- [Express](https://expressjs.com/) – Web framework for Node.js  
+- [Axios](https://axios-http.com/) – HTTP client for making API requests  
+- [MongoDB](https://www.mongodb.com/) – NoSQL database for storing data
+
+- **Gemini API Key** – AI integration for intelligent responses  
+
+## 🔧 Development Setup
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clone the repository
+git clone <YOUR_REPOSITORY_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to the project directory
+cd CareerCoach-FE
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
+## 📱 Screenshots
 
-## What technologies are used for this project?
+### Home Page
+![image](https://github.com/user-attachments/assets/cce26cfb-abf2-4f20-a61e-305b37fb8231)
 
-This project is built with .
+### Interview Simulator
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+![image](https://github.com/user-attachments/assets/8430fb40-4095-4c40-b5b8-19fb3a77c914)
+
+#-----------------------------------------------------------------------------------------------------------
+
+### Skill analysis
+
+![image](https://github.com/user-attachments/assets/acd09960-d9fa-4f5f-9059-4f8ad6ab7f2e)
+
+#-----------------------------------------------------------------------------------------------------------
+
+### Market Trends
+
+![image](https://github.com/user-attachments/assets/390fa28f-8764-41f8-872e-a5ed82d2b251)
+
+#-----------------------------------------------------------------------------------------------------------
+
+### Courses Recommendation
+
+![image](https://github.com/user-attachments/assets/46ccb311-a60a-4132-b1dd-101f287621cb)
+
+#-----------------------------------------------------------------------------------------------------------
+
+### About Us
+
+![image](https://github.com/user-attachments/assets/4a0010a6-d376-452f-8a5d-8857dd0d0cb9)
+
+#-----------------------------------------------------------------------------------------------------------
+
+
+  
+## 🏆 Benefits
+✅ Gain confidence through realistic AI-driven interview practice  
+✅ Get insights into industry trends and high-demand skills  
+✅ Build a strong professional network with industry experts  
+✅ Improve your skills with personalized learning paths  
+✅ Make informed career decisions with AI-generated suggestions  
+
+## 🚀 Deployment
+
+To build for production:
+
+```sh
+npm run build
+```
+
+The build artifacts will be stored in the `dist/` directory, ready to be deployed to your hosting provider of choice.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
