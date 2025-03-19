@@ -2,13 +2,20 @@ import { useState, useEffect, useRef } from 'react';
 import { Bot, MessageCircle, X, HelpCircle, HandHelping, Sparkles } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 interface Message {
   text: string;
   sender: 'bot' | 'user';
 }
 
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+console.log(import.meta.env.VITE_GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
 export default function AIHelperBot() {
+
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { text: "👋 Hi there! I'm your AI career assistant. How can I help you today?", sender: 'bot' }
@@ -100,33 +107,28 @@ export default function AIHelperBot() {
     };
   }, [isOpen]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+  
     if (!inputValue.trim()) return;
-    
+  
     // Add user message
     setMessages(prev => [...prev, { text: inputValue, sender: 'user' }]);
-    
-    // Simulate bot response
-    setTimeout(() => {
-      let response: string;
-      
-      if (inputValue.toLowerCase().includes('interview')) {
-        response = "Looking to practice interviews? Check out our Interview Simulator for real-time feedback!";
-      } else if (inputValue.toLowerCase().includes('skill') || inputValue.toLowerCase().includes('learn')) {
-        response = "Want to improve your skills? Try our Skills Analysis tool to identify gaps and get personalized recommendations.";
-      } else if (inputValue.toLowerCase().includes('job') || inputValue.toLowerCase().includes('career')) {
-        response = "Explore our Market Trends page to see the latest industry demands and career opportunities.";
-      } else {
-        response = "I can help with interview prep, skill development, course recommendations, and career advice. What would you like to know more about?";
-      }
-      
+  
+    try {
+      const result = await model.generateContent(inputValue);
+      const response = result.response.text();
+      console.log(response)
+  
+      // Add bot's response
       setMessages(prev => [...prev, { text: response, sender: 'bot' }]);
-    }, 1000);
-    
+    } catch (error) {
+      console.error("Error generating response:", error);
+      setMessages(prev => [...prev, { text: "Sorry, I couldn't process that. Please try again.", sender: 'bot' }]);
+    }
+  
     setInputValue('');
-  };
+  };  
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
