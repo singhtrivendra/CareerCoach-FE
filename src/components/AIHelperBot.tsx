@@ -14,8 +14,6 @@ console.log(import.meta.env.VITE_GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export default function AIHelperBot() {
-
-
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { text: "👋 Hi there! I'm your AI career assistant. How can I help you today?", sender: 'bot' }
@@ -29,17 +27,40 @@ export default function AIHelperBot() {
   const [isFlipping, setIsFlipping] = useState(false);
   const [isDancing, setIsDancing] = useState(false);
   const [actionTimeout, setActionTimeout] = useState<NodeJS.Timeout | null>(null);
+  const speechSynthesisRef = useRef<SpeechSynthesisUtterance | null>(null);
   
   const animationRef = useRef<number>();
   const botRef = useRef<HTMLDivElement>(null);
 
-  // Initialize bot
+  // Initialize bot and speech synthesis
   useEffect(() => {
     const showTimeout = setTimeout(() => setIsVisible(true), 1500);
+    
+    // Initialize speech synthesis
+    if (!speechSynthesisRef.current) {
+      speechSynthesisRef.current = new SpeechSynthesisUtterance();
+      speechSynthesisRef.current.rate = 1.0;
+      speechSynthesisRef.current.pitch = 1.0;
+      speechSynthesisRef.current.volume = 0.8;
+    }
+    
     return () => {
       clearTimeout(showTimeout);
+      if (speechSynthesis && speechSynthesisRef.current) {
+        speechSynthesis.cancel();
+      }
     };
   }, []);
+  
+  // Speak greeting when hovered
+  useEffect(() => {
+    if (hover && !isOpen && speechSynthesisRef.current) {
+      speechSynthesisRef.current.text = "Hey! How can I help you today?";
+      speechSynthesis.speak(speechSynthesisRef.current);
+    } else if (!hover && speechSynthesis) {
+      speechSynthesis.cancel();
+    }
+  }, [hover, isOpen]);
 
   // Schedule random animations
   useEffect(() => {
@@ -118,13 +139,26 @@ export default function AIHelperBot() {
     try {
       const result = await model.generateContent(inputValue);
       const response = result.response.text();
-      console.log(response)
+      console.log(response);
   
       // Add bot's response
       setMessages(prev => [...prev, { text: response, sender: 'bot' }]);
+      
+      // Speak the bot's response
+      if (speechSynthesisRef.current) {
+        speechSynthesisRef.current.text = response;
+        speechSynthesis.speak(speechSynthesisRef.current);
+      }
     } catch (error) {
       console.error("Error generating response:", error);
-      setMessages(prev => [...prev, { text: "Sorry, I couldn't process that. Please try again.", sender: 'bot' }]);
+      const errorMessage = "Sorry, I couldn't process that. Please try again.";
+      setMessages(prev => [...prev, { text: errorMessage, sender: 'bot' }]);
+      
+      // Speak the error message
+      if (speechSynthesisRef.current) {
+        speechSynthesisRef.current.text = errorMessage;
+        speechSynthesis.speak(speechSynthesisRef.current);
+      }
     }
   
     setInputValue('');
@@ -132,6 +166,10 @@ export default function AIHelperBot() {
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
+    // Cancel any speech when toggling
+    if (speechSynthesis) {
+      speechSynthesis.cancel();
+    }
   };
 
   if (!isVisible) return null;

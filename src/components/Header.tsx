@@ -41,7 +41,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link 
           to="/" 
-          className="flex items-center space-x-2 text-xl font-medium animate-hover"
+          className="flex items-center space-x-2 px-6 text-xl font-medium animate-hover"
         >
           <span className="text-gradient font-bold">CareerCoach</span>
         </Link>
@@ -67,7 +67,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center mr-64">
+        <div className="flex items-center mr-32 px-11">
           <ThemeToggle />
           
           <button
